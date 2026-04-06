@@ -1,43 +1,36 @@
-name: Deploy MkDocs Site
+name: Deploy MkDocs
 
 on:
   push:
-    branches: [ main ]  # 当推送到 main 分支时触发
-  pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
+
     steps:
-    # 1. 检出代码
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # 获取完整的提交历史
-    
-    # 2. 设置 Python 环境
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'  # 使用 Python 3.10
-    
-    # 3. 安装依赖（这就是自动安装 requirements.txt 的步骤！）
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-    
-    # 4. 构建站点
-    - name: Build site
-      run: |
-        mkdocs build
-    
-    # 5. 部署到 GitHub Pages
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub 自动提供
-        publish_dir: ./site                        # 构建后的输出目录
-        publish_branch: gh-pages                   # 发布到 gh-pages 分支
-        force_orphan: true
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install mkdocs mkdocs-material
+
+      - name: Build site
+        run: mkdocs build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
+          # 关键：即使分支不存在，v4 也能创建（但需确保 git config 完整）
