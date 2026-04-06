@@ -1,5 +1,5 @@
-site_name: mrlay's space
-site_url: https://mrlay.github.io
+site_name: mrlay's blog
+site_url: https://mrlay.github.io/blog/
 site_author: mrlay
 site_description: 这是我的个人博客，分享技术与生活
 
@@ -13,6 +13,9 @@ theme:
     code: Roboto Mono
   icon:
     logo: material/library
+
+use_directory_urls: true
+
 markdown_extensions:
   - admonition
   - codehilite:
