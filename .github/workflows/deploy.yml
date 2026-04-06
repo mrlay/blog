@@ -9,6 +9,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # ← 必须存在！
+      pages: write      # ← 如果使用 Pages API（v4+ 推荐加）
     
     steps:
     # 1. 检出代码
