@@ -1,7 +1,10 @@
 site_name: mrlay's blog
 site_url: https://mrlay.github.io/blog/
+repo_url: https://github.com.mrlay/blog
 site_author: mrlay
 site_description: 这是我的个人博客，分享技术与生活
+
+base_url: /blog/
 
 theme:
   name: material
