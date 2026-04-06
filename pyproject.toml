@@ -1,0 +1,12 @@
+[project]
+name = "doc-prj"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mkdocs>=1.6.1",
+    "mkdocs-git-revision-date-plugin>=0.3.2",
+    "mkdocs-material>=9.7.6",
+    "mkdocs-minify-plugin>=0.8.0",
+]
